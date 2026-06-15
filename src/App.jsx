@@ -156,12 +156,9 @@ function Browse() {
   return (
     <>
       <section className="hero">
-        <div className="eyebrow">Dementia caregiving · a field guide</div>
-        <h1>Specific things to try when caring for someone with <em>dementia</em>.</h1>
-        <p className="lede">
-          Not theory — methods. Each one is a concrete thing you can do, with the evidence behind it,
-          written for when you’re tired and short on time. Search what’s happening, or browse by what’s hardest right now.
-        </p>
+        <div className="eyebrow">For dementia caregivers</div>
+        <h1>Strategies for caring for someone with <em>dementia</em>.</h1>
+        <p className="lede">Search what’s happening, or browse by what’s hardest right now.</p>
 
         <div className="searchwrap">
           <div className="searchbox">
@@ -288,28 +285,17 @@ function FilterGroup({ title, children }) {
 /* ---------------- Method card ---------------- */
 function Card({ method: m }) {
   const t = topicById(m.topic)
-  const ev = evidenceById(m.evidence)
-  const ef = effortById(m.effort)
-  const k = kindById(m.kind)
   return (
     <button className="card" style={accentVars(t)} onClick={() => go('#/method/' + m.slug)}>
       <div className="toptag">
         <span className="tag"><span className="swatch" style={{ background: t.color }} />{t.label}</span>
-        <span className="toptag-right">
-          <span className={`kindtag kind-${m.kind}`}>{k.one}</span>
-          <span className="num">№ {String(m.n).padStart(2, '0')}</span>
-        </span>
+        <span className="num">№ {String(m.n).padStart(2, '0')}</span>
       </div>
       <h3>{m.title}</h3>
       <p className="sum">{m.summary}</p>
       {m.situations?.[0] && (
         <div className="when"><span className="lbl">When</span><span>{m.situations[0]}</span></div>
       )}
-      <div className="badges">
-        <span className={`badge evi-${m.evidence}`}><Icon name={m.evidence === 'research' ? 'flask' : m.evidence === 'clinical' ? 'badge' : 'heart'} />{ev.label}</span>
-        <span className="badge"><Icon name="clock" />{ef.label}</span>
-        <span className="badge"><Icon name="layers" />{m.stages.map(stageLabel).join(' · ')}</span>
-      </div>
       {m.tool && (
         <div className="toolhint">
           <Icon name={TOOL_ICON[m.tool.kind]} />{TOOLKINDS[m.tool.kind].label}
