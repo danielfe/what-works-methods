@@ -77,9 +77,8 @@ export default function App() {
 function Header() {
   return (
     <header className="topbar">
-      <button className="brand" onClick={() => go('#/')} aria-label="What Works — home">
-        <span className="mark">What <em>Works</em></span>
-        <span className="by">The Holding Co</span>
+      <button className="brand" onClick={() => go('#/')} aria-label="The Holding Co — home">
+        <span className="mark">The Holding Co</span>
       </button>
       <nav>
         <button className="navlink" onClick={() => go('#/')}>Methods</button>
@@ -435,7 +434,7 @@ function About() {
   return (
     <article className="prose center-col" style={{ paddingTop: 14 }}>
       <button className="backlink" onClick={() => go('#/')}><Icon name="arrowLeft" />All methods</button>
-      <h1>About What Works</h1>
+      <h1>About this guide</h1>
       <p className="lede">
         A calm, searchable field guide of specific things to try when you’re caring for someone with dementia —
         each one concrete, evidence-informed, and written for a real, tired day.
@@ -483,7 +482,7 @@ function About() {
 function Footer() {
   return (
     <footer className="foot">
-      <span>What Works · a project of The Holding Co · {METHODS.length} methods</span>
+      <span>A project of The Holding Co · {METHODS.length} methods</span>
       <span>Sourced from the Alzheimer’s Association, NIA, Alzheimer’s Society (UK), NHS, Family Caregiver Alliance, Dementia UK & peer-reviewed research. · <a href="#/lab" onClick={(e) => { e.preventDefault(); go('#/lab') }}>Design lab ↗</a></span>
     </footer>
   )

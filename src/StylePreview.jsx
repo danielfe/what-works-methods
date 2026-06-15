@@ -21,7 +21,7 @@ export default function StylePreview() {
     <div className="lab">
       <div className="lab-wrap">
         <div className="lab-top">
-          <span className="wm">What Works</span>
+          <span className="wm">The Holding Co</span>
           <span className="kick">Design Lab · Direction B</span>
           <a href="#/" onClick={(e) => { e.preventDefault(); go('#/') }}>← back to the live site</a>
         </div>
@@ -153,7 +153,7 @@ export default function StylePreview() {
         </section>
 
         <div className="lab-foot">
-          <span>What Works — Design Lab</span>
+          <span>The Holding Co — Design Lab</span>
           <span>Alternate direction · not the live site</span>
         </div>
       </div>
