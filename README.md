@@ -9,6 +9,9 @@ A project of **The Holding Co**. Content is synthesized from the THCo dementia k
 which draws on the Alzheimer's Association, NIA, Alzheimer's Society (UK), NHS, Family Caregiver
 Alliance, Dementia UK, Teepa Snow, Pauline Boss, and peer-reviewed sources.
 
+- **Live:** https://what-works-methods.onrender.com
+- **Design lab** (alternate visual direction, scoped, doesn't touch the live site): https://what-works-methods.onrender.com/#/lab
+
 ## Run it
 
 ```bash
@@ -19,12 +22,27 @@ npm run preview  # preview the production build
 ```
 
 Stack: React 19 + Vite. No backend, no database — all content lives in `src/data.js`.
-A tiny hash router (`#/`, `#/method/<slug>`, `#/about`) keeps it dependency-free and trivially hostable as a static site.
+A tiny hash router (`#/`, `#/method/<slug>`, `#/about`, `#/lab`) keeps it dependency-free and
+trivially hostable as a static site (hash routes need no server rewrite rules).
+
+Deployed on Render as a static site from GitHub (`master` branch): build `npm install && npm run build`,
+publish `dist`. Pushing to `master` auto-deploys.
+
+The **design lab** (`src/StylePreview.jsx` + `src/style-lab.css`, route `#/lab`) is a self-contained
+alternate visual direction — flat editorial "field manual": Bricolage Grotesque + IBM Plex Mono,
+porcelain, hairlines, color-as-signal. All its CSS is scoped under `.lab` so it never affects the live site.
 
 ## What's here
 
-- **36 methods** across 6 topics (Talking & connecting, Everyday care, Activity & purpose,
+- **39 methods** across 6 topics (Talking & connecting, Everyday care, Activity & purpose,
   Sleep & evenings, Home & safety, You the caregiver).
+- **Scenarios vs. practices.** Every page is one content type (so each stays a strong standalone
+  SEO landing page), but tagged by `kind`: **scenarios** are acute "this is happening now" moments
+  ("When they accuse you of stealing"); **practices** are techniques you adopt ("Anchor the day").
+  An "I'm looking for" lens filters between them, and detail pages cross-link directionally
+  ("the practices behind this moment").
+- **Example scripts.** Scenario and conversation methods carry "Try saying / Avoid — it backfires"
+  scripts (19 methods), hinting at a future "practice this conversation" tool.
 - **Search** by what's happening ("won't shower", "up all night") — weighted toward the
   *situation* a caregiver actually types.
 - **Browse / filter** by topic, dementia stage (early/middle/late), effort (in the moment /
