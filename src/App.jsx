@@ -157,7 +157,7 @@ function Browse() {
       <section className="hero">
         <div className="eyebrow">For dementia caregivers</div>
         <h1>Strategies for caring for someone with <em>dementia</em>.</h1>
-        <p className="lede">Search what’s happening, or browse by what’s hardest right now.</p>
+        <p className="lede">A place to share what works.</p>
 
         <div className="searchwrap">
           <div className="searchbox">
