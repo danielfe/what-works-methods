@@ -1,9 +1,10 @@
 import { useEffect, useMemo, useState } from 'react'
 import {
-  METHODS, TOPICS, STAGES, EFFORTS, EVIDENCE, QUICK_ENTRIES, TOOLKINDS,
-  topicById, stageLabel, effortById, evidenceById,
+  METHODS, TOPICS, STAGES, EFFORTS, EVIDENCE, KINDS, QUICK_ENTRIES, TOOLKINDS,
+  topicById, stageLabel, effortById, evidenceById, kindById,
 } from './data.js'
 import Icon, { TOOL_ICON } from './Icon.jsx'
+import StylePreview from './StylePreview.jsx'
 
 /* ---------------- tiny hash router ---------------- */
 function useRoute() {
@@ -52,6 +53,9 @@ export default function App() {
   const route = useRoute()
   useEffect(() => { window.scrollTo(0, 0) }, [route])
 
+  // The design lab is a fully self-contained alternate skin — render it without the live chrome.
+  if (route.startsWith('#/lab')) return <StylePreview />
+
   let view = <Browse />
   const m = route.match(/^#\/method\/(.+)$/)
   if (m) {
@@ -88,6 +92,7 @@ function Header() {
 /* ---------------- Browse (home) ---------------- */
 function Browse() {
   const [query, setQuery] = useState('')
+  const [kinds, setKinds] = useState(() => new Set())
   const [topics, setTopics] = useState(() => new Set())
   const [stages, setStages] = useState(() => new Set())
   const [efforts, setEfforts] = useState(() => new Set())
@@ -100,14 +105,15 @@ function Browse() {
     next.has(val) ? next.delete(val) : next.add(val)
     return next
   })
-  const reset = () => { setTopics(new Set()); setStages(new Set()); setEfforts(new Set()); setEvidences(new Set()); setQuery('') }
-  const activeCount = topics.size + stages.size + efforts.size + evidences.size
+  const reset = () => { setKinds(new Set()); setTopics(new Set()); setStages(new Set()); setEfforts(new Set()); setEvidences(new Set()); setQuery('') }
+  const activeCount = kinds.size + topics.size + stages.size + efforts.size + evidences.size
 
   const results = useMemo(() => {
     let list = METHODS
       .map(m => ({ m, score: scoreMethod(m, query) }))
       .filter(({ m, score }) => {
         if (query && score <= 0) return false
+        if (kinds.size && !kinds.has(m.kind)) return false
         if (topics.size && !topics.has(m.topic)) return false
         if (stages.size && !m.stages.some(s => stages.has(s))) return false
         if (efforts.size && !efforts.has(m.effort)) return false
@@ -118,20 +124,34 @@ function Browse() {
     else if (sort === 'number') list.sort((a, b) => a.m.n - b.m.n)
     else list.sort((a, b) => a.m.n - b.m.n)
     return list.map(x => x.m)
-  }, [query, topics, stages, efforts, evidences, sort])
+  }, [query, kinds, topics, stages, efforts, evidences, sort])
+
+  const kindCounts = useMemo(() => {
+    const c = {}
+    for (const m of METHODS) {
+      if (query && scoreMethod(m, query) <= 0) continue
+      if (topics.size && !topics.has(m.topic)) continue
+      if (stages.size && !m.stages.some(s => stages.has(s))) continue
+      if (efforts.size && !efforts.has(m.effort)) continue
+      if (evidences.size && !evidences.has(m.evidence)) continue
+      c[m.kind] = (c[m.kind] || 0) + 1
+    }
+    return c
+  }, [query, topics, stages, efforts, evidences])
 
   // counts per topic for the rail (respecting current query but not topic filter)
   const topicCounts = useMemo(() => {
     const c = {}
     for (const m of METHODS) {
       if (query && scoreMethod(m, query) <= 0) continue
+      if (kinds.size && !kinds.has(m.kind)) continue
       if (stages.size && !m.stages.some(s => stages.has(s))) continue
       if (efforts.size && !efforts.has(m.effort)) continue
       if (evidences.size && !evidences.has(m.evidence)) continue
       c[m.topic] = (c[m.topic] || 0) + 1
     }
     return c
-  }, [query, stages, efforts, evidences])
+  }, [query, kinds, stages, efforts, evidences])
 
   return (
     <>
@@ -174,6 +194,15 @@ function Browse() {
 
       <div className="browse">
         <aside className={`rail ${showFilters ? '' : 'collapsed'}`}>
+          <FilterGroup title="I’m looking for">
+            {KINDS.map(k => (
+              <button key={k.id} className={`filteritem ${kinds.has(k.id) ? 'on' : ''}`} onClick={() => toggle(setKinds)(k.id)} title={k.note}>
+                <span className="dot" />{k.label}
+                <span className="cnt">{kindCounts[k.id] || 0}</span>
+              </button>
+            ))}
+          </FilterGroup>
+
           <FilterGroup title="Topic">
             {TOPICS.map(t => (
               <button key={t.id} className={`filteritem ${topics.has(t.id) ? 'on' : ''}`} onClick={() => toggle(setTopics)(t.id)}>
@@ -261,11 +290,15 @@ function Card({ method: m }) {
   const t = topicById(m.topic)
   const ev = evidenceById(m.evidence)
   const ef = effortById(m.effort)
+  const k = kindById(m.kind)
   return (
     <button className="card" style={accentVars(t)} onClick={() => go('#/method/' + m.slug)}>
       <div className="toptag">
         <span className="tag"><span className="swatch" style={{ background: t.color }} />{t.label}</span>
-        <span className="num">№ {String(m.n).padStart(2, '0')}</span>
+        <span className="toptag-right">
+          <span className={`kindtag kind-${m.kind}`}>{k.one}</span>
+          <span className="num">№ {String(m.n).padStart(2, '0')}</span>
+        </span>
       </div>
       <h3>{m.title}</h3>
       <p className="sum">{m.summary}</p>
@@ -301,7 +334,10 @@ function Detail({ method: m }) {
       <header className="detail-head">
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 12 }}>
           <span className="tag"><span className="swatch" style={{ background: t.color }} />{t.label}</span>
-          <span className="num">№ {String(m.n).padStart(2, '0')}</span>
+          <span className="toptag-right">
+            <span className={`kindtag kind-${m.kind}`}>{kindById(m.kind).one}</span>
+            <span className="num">№ {String(m.n).padStart(2, '0')}</span>
+          </span>
         </div>
         <h1>{m.title}</h1>
         <p className="sum">{m.summary}</p>
@@ -331,21 +367,27 @@ function Detail({ method: m }) {
 
       {(m.say?.length || m.dontSay?.length) ? (
         <section className="section">
-          <h2><Icon name="message" />What to say</h2>
+          <h2><Icon name="message" />Example scripts</h2>
+          <p className="section-note">Words to borrow, not a script to read out. Adapt them to your own voice and the moment.</p>
           <div className="saygrid">
             {m.say?.length > 0 && (
               <div className="saybox say">
-                <h5><Icon name="check" />Try</h5>
+                <h5><Icon name="check" />Try saying</h5>
                 <ul>{m.say.map((s, i) => <li key={i}>{s}</li>)}</ul>
               </div>
             )}
             {m.dontSay?.length > 0 && (
               <div className="saybox dont">
-                <h5><Icon name="x" />Avoid</h5>
+                <h5><Icon name="x" />Avoid — it backfires</h5>
                 <ul>{m.dontSay.map((s, i) => <li key={i}>{s}</li>)}</ul>
               </div>
             )}
           </div>
+          {m.tool?.kind === 'practice' && (
+            <p className="section-note" style={{ marginTop: 12 }}>
+              <Icon name="message" /> Soon you’ll be able to <strong>practice this conversation</strong> out loud and get gentle feedback.
+            </p>
+          )}
         </section>
       ) : null}
 
@@ -383,13 +425,14 @@ function Detail({ method: m }) {
 
       {related.length > 0 && (
         <section className="section">
-          <h2><Icon name="arrowRight" />Methods that pair with this</h2>
+          <h2><Icon name="arrowRight" />{m.kind === 'scenario' ? 'The practices behind this moment' : 'Pairs well with'}</h2>
           <div className="relgrid">
             {related.map(r => {
               const rt = topicById(r.topic)
+              const rk = kindById(r.kind)
               return (
                 <button key={r.slug} className="relcard" style={accentVars(rt)} onClick={() => go('#/method/' + r.slug)}>
-                  <span className="tag"><span className="swatch" style={{ background: rt.color }} />{rt.short}</span>
+                  <span className="tag"><span className="swatch" style={{ background: rt.color }} />{rt.short} · {rk.one}</span>
                   <h4>{r.title}</h4>
                 </button>
               )
@@ -455,7 +498,7 @@ function Footer() {
   return (
     <footer className="foot">
       <span>What Works · a project of The Holding Co · {METHODS.length} methods</span>
-      <span>Sourced from the Alzheimer’s Association, NIA, Alzheimer’s Society (UK), NHS, Family Caregiver Alliance, Dementia UK & peer-reviewed research.</span>
+      <span>Sourced from the Alzheimer’s Association, NIA, Alzheimer’s Society (UK), NHS, Family Caregiver Alliance, Dementia UK & peer-reviewed research. · <a href="#/lab" onClick={(e) => { e.preventDefault(); go('#/lab') }}>Design lab ↗</a></span>
     </footer>
   )
 }

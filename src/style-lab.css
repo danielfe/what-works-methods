@@ -1,0 +1,133 @@
+/* ============================================================
+   DESIGN LAB — an alternate visual direction, fully scoped under .lab
+   "Field manual": porcelain canvas, Bricolage Grotesque display,
+   IBM Plex Mono catalog labels, squared geometry, crisp hairlines,
+   and color used as ONE precise signal per card (not washes).
+   Nothing here touches the live site's styles.
+   ============================================================ */
+
+.lab {
+  --l-paper: #f3f1e9;
+  --l-ink: #1a1813;
+  --l-soft: #5c594f;
+  --l-faint: #918d81;
+  --l-line: rgba(22,20,14,0.16);
+  --l-line-soft: rgba(22,20,14,0.08);
+  --l-card: #fcfbf7;
+  --l-disp: "Bricolage Grotesque", "Inter", sans-serif;
+  --l-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --l-sans: "Inter", -apple-system, system-ui, sans-serif;
+
+  min-height: 100vh;
+  background: var(--l-paper);
+  color: var(--l-ink);
+  font-family: var(--l-sans);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+.lab *, .lab *::before, .lab *::after { box-sizing: border-box; }
+.lab ::selection { background: var(--l-ink); color: var(--l-paper); }
+
+.lab-wrap { max-width: 1140px; margin: 0 auto; padding: 0 26px 120px; }
+
+.lab .mono { font-family: var(--l-mono); font-size: 11.5px; letter-spacing: 0.06em; text-transform: uppercase; }
+
+/* ---- top bar ---- */
+.lab-top { display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding: 20px 0; border-bottom: 1.5px solid var(--l-ink); margin-bottom: 0; }
+.lab-top .wm { font-family: var(--l-disp); font-weight: 700; font-size: 21px; letter-spacing: -0.02em; }
+.lab-top .kick { font-family: var(--l-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--l-faint); }
+.lab-top a { font-family: var(--l-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--l-ink); text-decoration: none; border-bottom: 1.5px solid var(--l-ink); padding-bottom: 2px; }
+.lab-top a:hover { color: var(--l-soft); }
+
+/* ---- banner note ---- */
+.lab-note { font-family: var(--l-mono); font-size: 12px; letter-spacing: 0.04em; color: var(--l-soft);
+  border-bottom: 1px solid var(--l-line); padding: 12px 0; display: flex; gap: 10px; align-items: baseline; }
+.lab-note b { color: var(--l-ink); }
+
+/* ---- hero ---- */
+.lab-hero { padding: 60px 0 40px; border-bottom: 1.5px solid var(--l-ink); }
+.lab-hero .eyebrow { font-family: var(--l-mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--l-soft); }
+.lab-hero h1 { font-family: var(--l-disp); font-weight: 700; font-size: clamp(38px, 6vw, 74px); line-height: 0.98;
+  letter-spacing: -0.025em; margin: 22px 0 0; max-width: 15ch; }
+.lab-hero h1 .u { box-shadow: inset 0 -0.12em 0 var(--l-accent, #b0552f); }
+.lab-hero .lede { font-size: 19px; color: var(--l-soft); margin: 26px 0 0; max-width: 52ch; }
+.lab-hero .meta-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 30px; }
+.lab-hero .meta-row span { font-family: var(--l-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;
+  color: var(--l-soft); border: 1px solid var(--l-line); border-radius: 2px; padding: 6px 10px; }
+
+/* ---- section heads ---- */
+.lab-sec { padding: 44px 0 0; }
+.lab-sec > .h { display: flex; align-items: baseline; gap: 14px; border-bottom: 1px solid var(--l-line); padding-bottom: 10px; margin-bottom: 26px; }
+.lab-sec > .h .n { font-family: var(--l-mono); font-size: 12px; color: var(--l-faint); }
+.lab-sec > .h h2 { font-family: var(--l-disp); font-weight: 600; font-size: 22px; letter-spacing: -0.01em; margin: 0; }
+.lab-sec > .h .meta { margin-left: auto; font-family: var(--l-mono); font-size: 11px; text-transform: uppercase; color: var(--l-faint); letter-spacing: 0.06em; }
+
+/* ---- card grid ---- */
+.lab-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-left: 1px solid var(--l-line); border-top: 1px solid var(--l-line); }
+@media (max-width: 900px) { .lab-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .lab-grid { grid-template-columns: 1fr; } }
+
+.lab-card { position: relative; text-align: left; background: var(--l-card); border-right: 1px solid var(--l-line);
+  border-bottom: 1px solid var(--l-line); padding: 20px 20px 18px; cursor: pointer; display: flex; flex-direction: column;
+  min-height: 230px; transition: background .12s ease; }
+.lab-card:hover { background: #fff; }
+.lab-card::before { content: ""; position: absolute; left: 0; top: 0; height: 3px; width: 0; background: var(--l-accent); transition: width .18s ease; }
+.lab-card:hover::before { width: 100%; }
+.lab-card .meta { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 16px; }
+.lab-card .kindtopic { font-family: var(--l-mono); font-size: 10.5px; letter-spacing: 0.05em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 7px; color: var(--l-soft); }
+.lab-card .sq { width: 9px; height: 9px; border-radius: 1px; background: var(--l-accent); }
+.lab-card .num { font-family: var(--l-disp); font-weight: 600; font-size: 26px; color: var(--l-line); line-height: 1; }
+.lab-card:hover .num { color: var(--l-accent); }
+.lab-card h3 { font-family: var(--l-disp); font-weight: 600; font-size: 20px; line-height: 1.12; letter-spacing: -0.015em; margin: 0; }
+.lab-card .sum { font-size: 14px; color: var(--l-soft); margin: 9px 0 0; }
+.lab-card .when { font-family: var(--l-mono); font-size: 11.5px; color: var(--l-ink); margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--l-line); }
+.lab-card .when b { color: var(--l-accent); letter-spacing: 0.04em; }
+.lab-card .foot { margin-top: auto; padding-top: 14px; font-family: var(--l-mono); font-size: 10.5px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--l-faint); display: flex; gap: 8px; flex-wrap: wrap; }
+.lab-card .foot .kt { color: var(--l-ink); }
+.lab-card .foot .kt.scenario { background: var(--l-ink); color: var(--l-paper); padding: 1px 6px; border-radius: 2px; }
+
+/* ---- palette swatches ---- */
+.lab-pal { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0; border: 1px solid var(--l-line); }
+@media (max-width: 700px) { .lab-pal { grid-template-columns: repeat(3, 1fr); } }
+.lab-pal .sw { padding: 0; border-right: 1px solid var(--l-line); }
+.lab-pal .sw:last-child { border-right: none; }
+.lab-pal .chip { height: 64px; }
+.lab-pal .lab-l { padding: 10px 12px; font-family: var(--l-mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--l-soft); border-top: 1px solid var(--l-line); }
+
+/* ---- sample detail ---- */
+.lab-detail { border: 1.5px solid var(--l-ink); background: var(--l-card); }
+.lab-detail .dh { padding: 30px 34px 26px; border-bottom: 1px solid var(--l-line); }
+.lab-detail .dh .ey { font-family: var(--l-mono); font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--l-soft); display: flex; gap: 10px; align-items: center; }
+.lab-detail .dh .ey .sq { width: 9px; height: 9px; border-radius: 1px; background: var(--l-accent); }
+.lab-detail .dh .ey .kt.scenario { background: var(--l-ink); color: var(--l-paper); padding: 1px 7px; border-radius: 2px; }
+.lab-detail .dh h2 { font-family: var(--l-disp); font-weight: 700; font-size: clamp(26px, 3.4vw, 38px); line-height: 1.04; letter-spacing: -0.02em; margin: 14px 0 0; max-width: 20ch; }
+.lab-detail .dh .sum { font-size: 17px; color: var(--l-soft); margin: 14px 0 0; max-width: 56ch; }
+.lab-detail .db { padding: 8px 34px 34px; }
+.lab-detail .blk { padding: 26px 0; border-bottom: 1px solid var(--l-line); }
+.lab-detail .blk:last-child { border-bottom: none; }
+.lab-detail .blk > h4 { font-family: var(--l-mono); font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--l-faint); margin: 0 0 14px; }
+.lab-detail .when-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.lab-detail .when-list li { font-family: var(--l-disp); font-size: 18px; font-weight: 500; padding-left: 22px; position: relative; }
+.lab-detail .when-list li::before { content: "→"; position: absolute; left: 0; color: var(--l-accent); font-family: var(--l-sans); }
+.lab-detail .why { font-size: 17px; line-height: 1.6; max-width: 64ch; }
+.lab-detail ol.lsteps { list-style: none; counter-reset: s; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px; }
+.lab-detail ol.lsteps li { counter-increment: s; display: grid; grid-template-columns: 28px 1fr; gap: 14px; align-items: start; font-size: 16px; }
+.lab-detail ol.lsteps li::before { content: counter(s, decimal-leading-zero); font-family: var(--l-mono); font-size: 12px; color: var(--l-accent); border: 1px solid var(--l-accent); width: 28px; height: 28px; display: grid; place-items: center; border-radius: 2px; }
+.lab-detail .scripts { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--l-line); }
+@media (max-width: 600px) { .lab-detail .scripts { grid-template-columns: 1fr; } }
+.lab-detail .scripts .col { padding: 16px 18px; }
+.lab-detail .scripts .col.try { border-right: 1px solid var(--l-line); }
+.lab-detail .scripts .col h5 { font-family: var(--l-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; margin: 0 0 12px; }
+.lab-detail .scripts .col.try h5 { color: #3e6138; }
+.lab-detail .scripts .col.avoid h5 { color: #9a4a37; }
+.lab-detail .scripts .col ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 9px; }
+.lab-detail .scripts .col li { font-family: var(--l-disp); font-size: 16px; font-weight: 500; }
+.lab-detail .srcs { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.lab-detail .srcs a { font-family: var(--l-mono); font-size: 12px; color: var(--l-ink); text-decoration: none; border-bottom: 1px solid var(--l-line); padding-bottom: 6px; display: inline-block; }
+.lab-detail .srcs a:hover { color: var(--l-accent); border-color: var(--l-accent); }
+
+.lab-foot { margin-top: 60px; border-top: 1.5px solid var(--l-ink); padding-top: 18px; font-family: var(--l-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--l-faint); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+@media (prefers-reduced-motion: reduce) { .lab * { transition: none !important; } }

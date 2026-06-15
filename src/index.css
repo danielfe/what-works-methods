@@ -156,6 +156,12 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 600; line-height: 1.1; lett
 .tag { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; letter-spacing: 0.03em; color: var(--accent); text-transform: uppercase; }
 .tag .swatch { width: 9px; height: 9px; }
 .card .num { font-family: var(--serif); font-size: 13px; color: var(--ink-faint); font-variant-numeric: tabular-nums; }
+.toptag-right { display: inline-flex; align-items: center; gap: 9px; }
+.kindtag { font-size: 10px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; white-space: nowrap; }
+.kindtag.kind-scenario { background: var(--ink); color: var(--paper); }
+.kindtag.kind-practice { color: var(--ink-faint); border: 1px solid var(--line); }
+.section-note { font-size: 14.5px; color: var(--ink-soft); margin: -6px 0 14px; max-width: 60ch; }
+.section-note svg.icon { color: var(--accent); }
 .card h3 { font-size: 21px; font-weight: 500; letter-spacing: -0.015em; }
 .card .sum { color: var(--ink-soft); font-size: 15px; margin: 9px 0 0; }
 .card .when { margin: 13px 0 0; font-size: 13.5px; color: var(--ink); background: var(--accent-wash); border-radius: 10px; padding: 9px 11px; display: flex; gap: 8px; align-items: flex-start; }

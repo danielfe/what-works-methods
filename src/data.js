@@ -349,6 +349,14 @@ export const METHODS = [
       'Keep talk short and positive — focus on what comes after (“then we’ll have your coffee”), not on how long it’s been.',
       'Have soothing music ready, and be willing to pause and come back.',
     ],
+    say: [
+      '“Let’s get you warm and freshened up — I’ve already warmed a towel for you.”',
+      '“You hold this, and we’ll be done before your coffee’s cold.”',
+    ],
+    dontSay: [
+      '“You need a bath, you haven’t washed in days.”',
+      '“We’re doing this whether you like it or not.”',
+    ],
     watchOut: ['A daily full shower is rarely necessary. Once or twice a week, with sponge baths between, is often plenty.'],
     tool: { kind: 'video' },
     sources: [
@@ -580,6 +588,14 @@ export const METHODS = [
       'Anchor doses to mealtimes and the daily routine; let them do what they can.',
       'Ask the prescriber to simplify the regimen, and about liquid, patch, or dissolvable forms if swallowing is the problem.',
     ],
+    say: [
+      '“I can see you don’t want these right now — can you tell me why?”',
+      '“No rush — let’s try again in a little while.”',
+    ],
+    dontSay: [
+      '“You have to take these now.”',
+      '“Stop being difficult and swallow them.”',
+    ],
     watchOut: ['Never crush a pill or hide it in food without checking with the pharmacist that it’s safe to crush and that covert dosing is appropriate. Lock all medications away as judgment declines.'],
     tool: { kind: 'reminder' },
     sources: [
@@ -640,6 +656,14 @@ export const METHODS = [
       'Hand over after you’ve started; break it into single steps.',
       'Read the signs — fading attention or rising frustration means modify or pause and try later.',
     ],
+    say: [
+      '“Could you help me with these?”',
+      '“Sit with me — keep me company while I do this.”',
+    ],
+    dontSay: [
+      '“Do you want to do an activity?”',
+      '“Why won’t you ever do anything?”',
+    ],
     watchOut: ['Apathy can look like depression, but depression brings sadness, tearfulness, and sleep/appetite change, and is treatable — flag it to the doctor.'],
     tool: { kind: 'printable' },
     sources: [
@@ -697,6 +721,15 @@ export const METHODS = [
       'Channel restless energy into a job — hand them a cloth to wipe the table, socks to pair, a bowl to stir.',
       'Don’t correct or criticize the result; thank them for the help.',
       'Watch what they start on their own and build those into the day.',
+    ],
+    say: [
+      '“Could you give me a hand folding these?”',
+      '“I always could count on you for this.”',
+      '“Thank you — that was a big help.”',
+    ],
+    dontSay: [
+      '“Just sit there, I’ll do it.”',
+      '“No, not like that — let me.”',
     ],
     tool: { kind: 'printable' },
     sources: [
@@ -839,6 +872,14 @@ export const METHODS = [
       'Check the obvious unmet need — toilet, pain, hunger, thirst, cold, fear.',
       'Guide them back to bed without quizzing them or debating the time.',
       'Discourage staying in bed awake or turning on the TV, to keep bed linked to sleep.',
+    ],
+    say: [
+      '“It’s alright — I’m here. Let’s get you back to bed.”',
+      '“Everything’s safe. I’ll sit with you a minute.”',
+    ],
+    dontSay: [
+      '“It’s the middle of the night, go back to sleep.”',
+      '“Why are you up again?”',
     ],
     watchOut: ['Sleep medications raise the risk of falls, fractures, and confusion in people with dementia and often don’t improve sleep. Antipsychotics carry an FDA black-box warning of increased stroke and death. Non-drug approaches first, always; involve the prescriber before any medication.'],
     tool: { kind: 'printable' },
@@ -1042,6 +1083,15 @@ export const METHODS = [
       'Record some of it in their own words — by voice or video. This is the irreplaceable part.',
       'Make it an activity with them, not a dossier about them; keep a short printable summary for hospital or ER, and share access across the family.',
     ],
+    say: [
+      '“Tell me about your wedding day.”',
+      '“What was your first job?”',
+      '“Who taught you to cook?”',
+    ],
+    dontSay: [
+      '“Do you remember when…?” (questions that test memory)',
+      '“No, that’s not how it happened.”',
+    ],
     tool: { kind: 'printable' },
     sources: [
       S('Alzheimer’s Society (UK) — “This is me”', 'https://www.alzheimers.org.uk/get-support/publications-factsheets/this-is-me'),
@@ -1069,6 +1119,14 @@ export const METHODS = [
       'Practice both/and: she is both here and gone; both my mother and someone who needs mothering; I feel both love and grief.',
       'Adjust your idea of mastery — you can’t fix this; control what you can and let go of the rest.',
       'Externalize the illness for yourself too: your frustration and grief are not failures of love.',
+    ],
+    say: [
+      '(to yourself) “She is both here and gone — and both are true.”',
+      '(to yourself) “This is grief, and it’s allowed.”',
+    ],
+    dontSay: [
+      '(to yourself) “I should be over this by now.”',
+      '(to yourself) “If I really loved her I wouldn’t feel this way.”',
     ],
     watchOut: ['If hopelessness or emptiness lasts more than two weeks, basic tasks slip, or you’re using alcohol or medication to cope, reach out to a clinician — these are signals to act, not weakness. If you ever have thoughts of self-harm or of not being able to go on, treat it as urgent and get help now (in the US, call or text 988).'],
     tool: { kind: 'practice' },
@@ -1107,6 +1165,131 @@ export const METHODS = [
     ],
     related: ['hold-both-and', 'morning-light', 'night-waking'],
   },
+
+  // ───────────────────────── MORE SCENARIOS ─────────────────────────
+  {
+    slug: 'wanting-to-drive',
+    n: 37,
+    topic: 'communication',
+    title: 'When they want to drive and it’s no longer safe',
+    summary: 'Arguing about their ability feels like an insult and rarely works. Move the conflict off the person and onto the situation.',
+    situations: [
+      'He insists he’s fine to drive',
+      'She’s angry that I took the keys',
+      'Every car trip turns into the same fight',
+    ],
+    stages: ['early', 'middle'],
+    effort: 'moment',
+    evidence: 'clinical',
+    why: 'Because of anosognosia, a person may genuinely not perceive the risk — so “you’re not safe” lands as an attack on their competence and independence. Reducing the conflict at the level of the situation (the car, the doctor, the DMV) is kinder and more effective than repeatedly debating their ability.',
+    steps: [
+      'Validate the loss out loud — losing driving is a real loss of independence.',
+      'Move the “no” onto someone or something else: the car is “in the shop,” the doctor or DMV “wants us to hold off,” the keys simply aren’t around.',
+      'Don’t re-litigate their ability each time; it only escalates.',
+      'Where you can, replace the freedom — rides, a standing outing — so the loss isn’t total.',
+    ],
+    say: [
+      '“I know how much you miss driving — that’s a real loss.”',
+      '“The mechanic’s still got the car.”',
+      '“The doctor wants us to hold off for now.”',
+    ],
+    dontSay: [
+      '“You’ll crash and kill someone.”',
+      '“You can’t drive anymore, you have dementia.”',
+    ],
+    watchOut: ['The legal and licensing steps for actually stopping someone driving vary by state and country — work them out with the doctor and your local licensing authority; the doctor can be a useful “authority” to carry the message.'],
+    tool: { kind: 'practice' },
+    sources: [
+      S('AARP — Therapeutic fibbing & diversion', 'https://www.aarp.org/caregiving/medical/therapeutic-fibbing-dementia-communication/'),
+      S('Alzheimer’s Association — Communication', 'https://www.alz.org/help-support/caregiving/daily-care/communications'),
+    ],
+    related: ['meet-them-in-their-reality', 'externalize-the-disease', 'should-i-tell-her'],
+  },
+  {
+    slug: 'living-in-an-earlier-time',
+    n: 38,
+    topic: 'communication',
+    title: 'When they insist on going to work, or to a long-past duty',
+    summary: 'They’re living in an earlier decade. Correcting the year just distresses them — go along, and relieve the worry underneath.',
+    situations: [
+      'He says he has to get to work',
+      'She’s anxious about picking up children who are now grown',
+      'He’s looking for his (long-retired) job',
+    ],
+    stages: ['middle'],
+    effort: 'moment',
+    evidence: 'clinical',
+    why: 'When someone is living in an earlier time, telling them the real year or that they retired decades ago corrects a fact without helping — and usually distresses them. The “obligation” almost always stands for a worry (responsibility, being needed, being on time). Relieve the worry and the urgency fades.',
+    steps: [
+      'Don’t correct the year or the decade.',
+      'Go along, then gently redirect to something now: a meal, a walk, a task together.',
+      'Answer the worry the duty represents — reassure that it’s handled, covered, taken care of.',
+    ],
+    say: [
+      '“The office called — your shift got moved to tomorrow. Let’s have some lunch.”',
+      '“The kids are all picked up and safe. Come sit with me a minute.”',
+    ],
+    dontSay: [
+      '“You retired twenty years ago.”',
+      '“The children are grown, they don’t need picking up.”',
+    ],
+    tool: { kind: 'practice' },
+    sources: [
+      S('AARP — Therapeutic fibbing & diversion', 'https://www.aarp.org/caregiving/medical/therapeutic-fibbing-dementia-communication/'),
+    ],
+    related: ['meet-them-in-their-reality', 'should-i-tell-her', 'answer-the-feeling'],
+  },
+  {
+    slug: 'parting-with-possessions',
+    n: 39,
+    topic: 'communication',
+    title: 'When it’s time to downsize or part with belongings',
+    summary: '“Pick one to keep” is a reasoning task they can’t do, and the attachment is emotional. Honor the meaning, photograph, and go slow.',
+    situations: [
+      'We need to downsize and she won’t let go of anything',
+      'He’s distressed at the idea of losing his things',
+      'Sorting belongings ends in tears or anger',
+    ],
+    stages: ['early', 'middle'],
+    effort: 'setup',
+    evidence: 'clinical',
+    why: 'Asking someone to choose which possessions to keep is a reasoning and prioritizing task — exactly what dementia erodes — and the attachment is emotional, not logical. Treating it as a feelings-first, unhurried, shared activity (not a sorting chore) keeps dignity and reduces conflict.',
+    steps: [
+      'Talk about what an item represents — the story, the person, the time — before anything moves.',
+      'Photograph the things that can’t be kept, so the memory stays even when the object goes.',
+      'Use a memory box as a gentle, finite limit (“these special ones live here”).',
+      'Go one drawer or shelf at a time, with them — and never discard things secretly.',
+    ],
+    say: [
+      '“This one’s special — tell me the story.”',
+      '“Let’s take a photo so you always have it.”',
+    ],
+    dontSay: [
+      '“You have to pick one, the rest is going.”',
+      '“It’s just junk, you won’t even remember it.”',
+    ],
+    tool: { kind: 'practice' },
+    sources: [
+      S('Conquering the “collected treasures” of older adults with dementia (PubMed)', 'https://pubmed.ncbi.nlm.nih.gov/39755377/'),
+      S('A Place for Mom — Memory care packing list', 'https://www.aplaceformom.com/caregiver-resources/articles/memory-care-packing-list'),
+    ],
+    related: ['meet-them-in-their-reality', 'capture-her-life-story', 'talk-to-me-not-about-me'],
+  },
+]
+
+// Scenario pages = acute "this is happening now" moments (the trigger is a behavior or
+// question). Everything else is a practice you adopt. Derived from a slug set so the
+// method objects stay clean.
+const SCENARIO_SLUGS = new Set([
+  'answer-the-feeling', 'i-want-to-go-home', 'false-accusation', 'asking-for-someone-who-died',
+  'find-the-reason-for-refused-meds', 'night-waking',
+  'wanting-to-drive', 'living-in-an-earlier-time', 'parting-with-possessions',
+])
+METHODS.forEach(m => { m.kind = SCENARIO_SLUGS.has(m.slug) ? 'scenario' : 'practice' })
+
+export const KINDS = [
+  { id: 'scenario', label: 'Scenarios', one: 'Scenario', note: 'A hard moment, as it’s happening', verb: 'In the moment' },
+  { id: 'practice', label: 'Practices', one: 'Practice', note: 'A technique or set-up you adopt', verb: 'A practice' },
 ]
 
 // Common "what's hardest right now" entry points → maps to a search query
@@ -1125,3 +1308,4 @@ export function topicById(id) { return TOPICS.find(t => t.id === id) }
 export function stageLabel(id) { return (STAGES.find(s => s.id === id) || {}).label || id }
 export function effortById(id) { return EFFORTS.find(e => e.id === id) }
 export function evidenceById(id) { return EVIDENCE.find(e => e.id === id) }
+export function kindById(id) { return KINDS.find(k => k.id === id) }
